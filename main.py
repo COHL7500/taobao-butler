@@ -60,19 +60,16 @@ async def on_message(message):
 
     if message.content == 'https://item.taobao.com/item.htm' or 'item.taobao.com/item':
         split = message.content.split()
-        links_found = []
-        for i in range(len(split)):
-            if 'https://item.taobao.com/item.htm' in split[i]:
-                links_found.append(tb_scanner(split[i], message.author))
+        links_found = [i for i in range(len(split)) if 'https://item.taobao.com/item.htm' in split[i]]
 
-                if len(links_found) == len(split): # only Link
-                    for links in range(len(links_found)):
-                        await message.channel.send(embed=links_found[links])
-                    await message.delete()
+        if len(links_found) == len(split): # only Link
+            for links in range(len(links_found)):
+                await message.channel.send(embed=links_found[links])
+                await message.delete()
 
-                elif len(links_found) < len(split): # w/ Text
-                    for links in range(len(links_found)):
-                        await message.channel.send(embed=links_found[links])
+        elif len(links_found) < len(split): # w/ Text
+            for links in range(len(links_found)):
+                await message.channel.send(embed=links_found[links])
 
 
 client.run(os.environ['DISCORD_TOKEN'])
