@@ -1,6 +1,5 @@
 #!/usr/bin/env pypy
 
-from dotenv import load_dotenv
 import os
 import discord
 from bs4 import BeautifulSoup
