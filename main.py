@@ -7,9 +7,6 @@ from bs4 import BeautifulSoup
 from google_trans_new import google_translator
 import requests
 
-load_dotenv('config.env')
-TOKEN = os.getenv('DISCORD_TOKEN')
-
 client = discord.Client()
 
 GUILD = client.get_guild(id)
@@ -79,7 +76,7 @@ async def on_message(message):
                         await message.channel.send(embed=links_found[links])
 
 
-client.run(TOKEN)
+client.run(os.environ['DISCORD_TOKEN'])
 
 # "https://item.taobao.com/item.htm"
 # "item.taobao.com/item"
