@@ -48,10 +48,16 @@ def tb_scanner(link, author):
     return response
 
 
+def mobile_convert_link(message):
+    convert = message.replace("m.intl", "item").replace("/detail/detail", "/item").replace(".html", ".htm")
+
+    convert_split = convert.split("&fb", 1)
+
+    return convert_split[0]
+
 @client.event
 async def on_ready():
     print(f'{client.user} has connected to Discord!')
-
 
 @client.event
 async def on_message(message):
@@ -60,7 +66,6 @@ async def on_message(message):
 
     if message.content == 'https://item.taobao.com/item.htm' or 'item.taobao.com/item':
         split = message.content.split()
-
         links_found = [tb_scanner(split[i], message.author) for i in range(len(split)) if 'https://item.taobao.com/item.htm' in split[i]]
 
         if len(links_found) == len(split): # only Link
@@ -71,6 +76,24 @@ async def on_message(message):
         elif len(links_found) < len(split): # w/ Text
             for links in range(len(links_found)):
                 await message.channel.send(embed=links_found[links])
+
+    elif message.content == 'https://m.intl.taobao.com/detail/detail.html' or "m.intl.taobao.com/detail/detail":
+
+        split = mobile_convert_link(message).content.split()
+
+        links_found = [tb_scanner(split[i], message.author) for i in range(len(split)) if
+                       'https://item.taobao.com/item.htm' in split[i]]
+
+        if len(links_found) == len(split):  # only Link
+            for links in range(len(links_found)):
+                await message.channel.send(embed=links_found[links])
+                await message.delete()
+
+        elif len(links_found) < len(split):  # w/ Text
+            for links in range(len(links_found)):
+                await message.channel.send(embed=links_found[links])
+
+
 
 
 client.run(os.environ['DISCORD_TOKEN'])
