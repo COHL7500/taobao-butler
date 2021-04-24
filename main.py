@@ -47,13 +47,12 @@ def tb_scanner(link, author):
 
     return response
 
-
-def mobile_convert_link(link):
+"""def mobile_convert_link(link):
     convert = link.replace("m.intl", "item").replace("/detail/detail", "/item").replace(".html", ".htm")
 
     convert_split = convert.split("&fb", 1)
 
-    return convert_split[0]
+    return convert_split[0]"""
 
 @client.event
 async def on_ready():
@@ -84,14 +83,19 @@ async def on_message(message):
 
         if len(links_found) == len(split):  # only Link
             for links in range(len(links_found)):
-                conversion = mobile_convert_link(str(links_found[links]))
-                await message.channel.send(embed=conversion)
+                convert = str(links_found[links]).replace("m.intl", "item").replace("/detail/detail", "/item").replace(".html", ".htm")
+                convert_split = convert.split("&fb", 1)
+
+                await message.channel.send(embed=convert_split)
                 await message.delete()
 
         elif len(links_found) < len(split):  # w/ Text
             for links in range(len(links_found)):
-                conversion = mobile_convert_link(str(links_found[links]))
-                await message.channel.send(embed=conversion)
+                convert = str(links_found[links]).replace("m.intl", "item").replace("/detail/detail", "/item").replace(
+                    ".html", ".htm")
+                convert_split = convert.split("&fb", 1)
+
+                await message.channel.send(embed=links_found[convert_split])
 
 
 
