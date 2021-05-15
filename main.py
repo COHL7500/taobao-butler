@@ -87,19 +87,26 @@ async def on_message(message):
             for links in range(len(links_found)):
                 convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(
                     ".html", ".htm")
-                convert_split = tb_scanner(convert.split("&fb", 1), message.author)
+                convert_split = convert.split("&fb", 1)
 
-                await message.channel.send(embed=convert_split)
+                print(convert_split)
+
+                mobile_embed = tb_scanner(convert_split, message.author) #tb_scanner(convert.split("&fb", 1), message.author)
+
+                await message.channel.send(embed=mobile_embed)
                 await message.delete()
 
         elif len(links_found) < len(split):  # w/ Text
             for links in range(len(links_found)):
                 convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(
                     ".html", ".htm")
-                convert_split = tb_scanner(convert.split("&fb", 1), message.author)
-                #convert_split = convert.split("&fb", 1)
+                convert_split = convert.split("&fb", 1)
 
-                await message.channel.send(embed=convert_split)
+                print(convert_split)
+
+                mobile_embed = tb_scanner(convert_split, message.author) #convert_split = convert.split("&fb", 1)
+
+                await message.channel.send(embed=mobile_embed)
 
 
 
