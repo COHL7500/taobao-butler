@@ -68,13 +68,12 @@ async def on_message(message):
 
     if message.content == 'https://m.intl.taobao.com/detail/detail.html' or "m.intl.taobao.com/detail/detail":
         split = message.content.split()
-        links_found = [tb_scanner(split[i], message.author) for i in range(len(split)) if
-                       'https://m.intl.taobao.com/detail/detail.html' in split[i]]
+        links_found = [tb_scanner(split[i], message.author) for i in range(len(split))]
 
         if len(links_found) == len(split):  # only Link
             for links in range(len(links_found)):
-                convert = str(links_found[links]).replace("m.intl", "item").replace("/detail/detail", "/item").replace(
-                    ".html", ".htm")
+                convert = [links.replace("m.intl", "item").replace("/detail/detail", "/item").replace(
+                    ".html", ".htm") for links in links_found]
                 convert_split = convert.split("&fb", 1)
 
                 await message.channel.send(embed=convert_split)
@@ -82,16 +81,15 @@ async def on_message(message):
 
         elif len(links_found) < len(split):  # w/ Text
             for links in range(len(links_found)):
-                convert = str(links_found[links]).replace("m.intl", "item").replace("/detail/detail", "/item").replace(
-                    ".html", ".htm")
+                convert = [links.replace("m.intl", "item").replace("/detail/detail", "/item").replace(
+                    ".html", ".htm") for links in links_found]
                 convert_split = convert.split("&fb", 1)
 
                 await message.channel.send(embed=links_found[convert_split])
 
     elif message.content == 'https://item.taobao.com/item.htm' or 'item.taobao.com/item':
         split = message.content.split()
-        links_found = [tb_scanner(split[i], message.author) for i in range(len(split)) if
-                       'https://item.taobao.com/item.htm' in split[i]]
+        links_found = [tb_scanner(split[i], message.author) for i in range(len(split))]
 
         if len(links_found) == len(split):  # only Link
             for links in range(len(links_found)):
