@@ -66,7 +66,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content == 'hi':
+    if "hi" in message.content:
         split = message.content.split()
         links_found = [tb_scanner(split[i], message.author) for i in range(len(split)) if 'https://item.taobao.com/item.htm' in split[i]]
 
