@@ -68,7 +68,8 @@ async def on_message(message):
 
     if 'item.taobao.com/item' in message.content:
         split = message.content.split()
-        links_found = [tb_scanner(split[i], message.author) for i in range(len(split)) if 'https://item.taobao.com/item.htm' in split[i]]
+        links_found = [tb_scanner(split[i], message.author) for i in range(len(split)) if
+                       'item.taobao.com/item' in split[i]]
 
         print(links_found)
 
@@ -81,26 +82,29 @@ async def on_message(message):
             for links in range(len(links_found)):
                 await message.channel.send(embed=links_found[links])
 
-    elif 'm.intl.taobao.com/detail/detail' in message.content:   #message.content == 'https://m.intl.taobao.com/detail/detail.html' or message.content == 'm.intl.taobao.com/detail/detail':
+    elif 'm.intl.taobao.com/detail/detail' in message.content:
         split = message.content.split()
-        links_found = [split[i] for i in range(len(split)) if 'https://m.intl.taobao.com/detail/detail.html' in split[i]]
+        links_found = [split[i] for i in range(len(split)) if
+                       'm.intl.taobao.com/detail/detail' in split[i]]
 
         if len(links_found) == len(split):  # only Link
             for links in range(len(links_found)):
-                convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(".html", ".htm")
-                convert_split = convert.split("&fb", 1)
+                convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(
+                    ".html", ".htm")
+                if "&fb" in convert: convert = convert.split("&fb", 1)
 
-                mobile_embed = tb_scanner(str(convert), message.author) #tb_scanner(convert.split("&fb", 1), message.author)
+                mobile_embed = tb_scanner(str(convert), message.author)
 
                 await message.channel.send(embed=mobile_embed)
                 await message.delete()
 
         elif len(links_found) < len(split):  # w/ Text
             for links in range(len(links_found)):
-                convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(".html", ".htm")
-                convert_split = convert.split("&fb", 1)
+                convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(
+                    ".html", ".htm")
+                if "&fb" in convert: convert = convert.split("&fb", 1)
 
-                mobile_embed = tb_scanner(str(convert), message.author) #convert_split = convert.split("&fb", 1)
+                mobile_embed = tb_scanner(str(convert), message.author)  # convert_split = convert.split("&fb", 1)
 
                 await message.channel.send(embed=mobile_embed)
 
