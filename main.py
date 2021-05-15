@@ -66,7 +66,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if "hi" in message.content:
+    if 'item.taobao.com/item' in message.content:
         split = message.content.split()
         links_found = [tb_scanner(split[i], message.author) for i in range(len(split)) if 'https://item.taobao.com/item.htm' in split[i]]
 
@@ -81,7 +81,7 @@ async def on_message(message):
             for links in range(len(links_found)):
                 await message.channel.send(embed=links_found[links])
 
-    elif message.content == 'https://m.intl.taobao.com/detail/detail.html' or message.content == 'm.intl.taobao.com/detail/detail':
+    elif 'm.intl.taobao.com/detail/detail' in message.content:   #message.content == 'https://m.intl.taobao.com/detail/detail.html' or message.content == 'm.intl.taobao.com/detail/detail':
         split = message.content.split()
         links_found = [split[i] for i in range(len(split)) if 'https://m.intl.taobao.com/detail/detail.html' in split[i]]
 
