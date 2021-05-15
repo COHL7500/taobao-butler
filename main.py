@@ -66,7 +66,21 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content == 'https://m.intl.taobao.com/detail/detail.html' or "m.intl.taobao.com/detail/detail":
+    if message.content == 'https://item.taobao.com/item.htm' or 'item.taobao.com/item':
+        split = message.content.split()
+        links_found = [tb_scanner(split[i], message.author) for i in range(len(split)) if 'https://item.taobao.com/item.htm' in split[i]]
+        print(links_found)
+
+        if len(links_found) == len(split):  # only Link
+            for links in range(len(links_found)):
+                await message.channel.send(embed=links_found[links])
+                await message.delete()
+
+        elif len(links_found) < len(split):  # w/ Text
+            for links in range(len(links_found)):
+                await message.channel.send(embed=links_found[links])
+
+    elif message.content == 'https://m.intl.taobao.com/detail/detail.html' or "m.intl.taobao.com/detail/detail":
         split = message.content.split()
         links_found = [tb_scanner(split[i], message.author) for i in range(len(split)) if 'https://m.intl.taobao.com/detail/detail.html' in split[i]]
         print(links_found)
@@ -88,19 +102,7 @@ async def on_message(message):
 
                 await message.channel.send(embed=links_found[convert_split])
 
-    elif message.content == 'https://item.taobao.com/item.htm' or 'item.taobao.com/item':
-        split = message.content.split()
-        links_found = [tb_scanner(split[i], message.author) for i in range(len(split)) if 'https://item.taobao.com/item.htm' in split[i]]
-        print(links_found)
 
-        if len(links_found) == len(split):  # only Link
-            for links in range(len(links_found)):
-                await message.channel.send(embed=links_found[links])
-                await message.delete()
-
-        elif len(links_found) < len(split):  # w/ Text
-            for links in range(len(links_found)):
-                await message.channel.send(embed=links_found[links])
 
 
 client.run(os.environ['DISCORD_TOKEN'])
