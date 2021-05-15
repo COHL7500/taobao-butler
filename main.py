@@ -69,11 +69,12 @@ async def on_message(message):
     if message.content == 'https://m.intl.taobao.com/detail/detail.html' or "m.intl.taobao.com/detail/detail":
         split = message.content.split()
         links_found = [tb_scanner(split[i], message.author) for i in range(len(split))]
+        print(links_found)
 
         if len(links_found) == len(split):  # only Link
             for links in range(len(links_found)):
-                convert = [links.replace("m.intl", "item").replace("/detail/detail", "/item").replace(
-                    ".html", ".htm") for links in links_found]
+                convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(
+                    ".html", ".htm")
                 convert_split = convert.split("&fb", 1)
 
                 await message.channel.send(embed=convert_split)
@@ -81,8 +82,8 @@ async def on_message(message):
 
         elif len(links_found) < len(split):  # w/ Text
             for links in range(len(links_found)):
-                convert = [links.replace("m.intl", "item").replace("/detail/detail", "/item").replace(
-                    ".html", ".htm") for links in links_found]
+                convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(
+                    ".html", ".htm")
                 convert_split = convert.split("&fb", 1)
 
                 await message.channel.send(embed=links_found[convert_split])
