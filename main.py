@@ -68,7 +68,7 @@ async def on_message(message):
 
     if message.content == 'https://m.intl.taobao.com/detail/detail.html' or "m.intl.taobao.com/detail/detail":
         split = message.content.split()
-        links_found = [tb_scanner(split[i], message.author) for i in range(len(split))]
+        links_found = [tb_scanner(split[i], message.author) for i in range(len(split)) if 'https://m.intl.taobao.com/detail/detail.html' in split[i]]
         print(links_found)
 
         if len(links_found) == len(split):  # only Link
@@ -90,7 +90,7 @@ async def on_message(message):
 
     elif message.content == 'https://item.taobao.com/item.htm' or 'item.taobao.com/item':
         split = message.content.split()
-        links_found = [tb_scanner(split[i], message.author) for i in range(len(split))]
+        links_found = [tb_scanner(split[i], message.author) for i in range(len(split)) if 'https://item.taobao.com/item.htm' in split[i]]
 
         if len(links_found) == len(split):  # only Link
             for links in range(len(links_found)):
