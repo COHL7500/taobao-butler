@@ -87,7 +87,7 @@ async def on_message(message):
 
         if len(links_found) == len(split):  # only Link
             for links in range(len(links_found)):
-                convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(".html", ".htm")
+                convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(".html", ".htm").replace("[", "").replace("]", "")
                 convert_split = convert.split("&fb", 1)
 
                 print(convert_split)
