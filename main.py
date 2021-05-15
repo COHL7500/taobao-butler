@@ -66,7 +66,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content == 'https://item.taobao.com/item.htm' or 'item.taobao.com/item':
+    if message.content == 'https://item.taobao.com/item.htm':
         split = message.content.split()
         links_found = [tb_scanner(split[i], message.author) for i in range(len(split)) if 'https://item.taobao.com/item.htm' in split[i]]
 
@@ -79,14 +79,13 @@ async def on_message(message):
             for links in range(len(links_found)):
                 await message.channel.send(embed=links_found[links])
 
-    elif message.content == 'https://m.intl.taobao.com/detail/detail.html' or "m.intl.taobao.com/detail/detail":
+    elif message.content == 'https://m.intl.taobao.com/detail/detail.html' or 'm.intl.taobao.com/detail/detail':
         split = message.content.split()
         links_found = [split[i] for i in range(len(split)) if 'https://m.intl.taobao.com/detail/detail.html' in split[i]]
 
         if len(links_found) == len(split):  # only Link
             for links in range(len(links_found)):
-                convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(
-                    ".html", ".htm")
+                convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(".html", ".htm")
                 convert_split = convert.split("&fb", 1)
 
                 print(convert_split)
