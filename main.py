@@ -81,7 +81,7 @@ async def on_message(message):
             for links in range(len(links_found)):
                 await message.channel.send(embed=links_found[links])
 
-    elif message.content == 'https://m.intl.taobao.com/detail/detail.html' or 'm.intl.taobao.com/detail/detail':
+    elif message.content == 'https://m.intl.taobao.com/detail/detail.html' or message.content == 'm.intl.taobao.com/detail/detail':
         split = message.content.split()
         links_found = [split[i] for i in range(len(split)) if 'https://m.intl.taobao.com/detail/detail.html' in split[i]]
 
