@@ -100,7 +100,7 @@ async def on_message(message):
                 convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(".html", ".htm")
                 convert_split = convert.split("&fb", 1)
 
-                mobile_embed = tb_scanner(convert_split, message.author) #convert_split = convert.split("&fb", 1)
+                mobile_embed = tb_scanner(str(convert_split), message.author) #convert_split = convert.split("&fb", 1)
 
                 await message.channel.send(embed=mobile_embed)
 
