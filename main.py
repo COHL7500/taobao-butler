@@ -99,7 +99,7 @@ async def on_message(message):
                 convert_split = tb_scanner(convert.split("&fb", 1), message.author)
                 #convert_split = convert.split("&fb", 1)
 
-                await message.channel.send(embed=links_found[convert_split])
+                await message.channel.send(embed=convert_split)
 
 
 
