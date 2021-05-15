@@ -83,7 +83,7 @@ async def on_message(message):
 
         if len(links_found) == len(split):  # only Link
             for links in range(len(links_found)):
-                convert = str(links_found[links]).replace("m.intl", "item").replace("/detail/detail", "/item").replace(".html", ".htm")
+                convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(".html", ".htm")
                 convert_split = convert.split("&fb", 1)
 
                 await message.channel.send(embed=convert_split)
@@ -91,7 +91,7 @@ async def on_message(message):
 
         elif len(links_found) < len(split):  # w/ Text
             for links in range(len(links_found)):
-                convert = str(links_found[links]).replace("m.intl", "item").replace("/detail/detail", "/item").replace(
+                convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(
                     ".html", ".htm")
                 convert_split = convert.split("&fb", 1)
 
