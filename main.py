@@ -87,10 +87,8 @@ async def on_message(message):
 
         if len(links_found) == len(split):  # only Link
             for links in range(len(links_found)):
-                convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(".html", ".htm").replace("[", "").replace("]", "")
+                convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(".html", ".htm")
                 convert_split = convert.split("&fb", 1)
-
-                print(convert_split)
 
                 mobile_embed = tb_scanner(convert_split, message.author) #tb_scanner(convert.split("&fb", 1), message.author)
 
@@ -101,8 +99,6 @@ async def on_message(message):
             for links in range(len(links_found)):
                 convert = links_found[links].replace("m.intl", "item").replace("/detail/detail", "/item").replace(".html", ".htm")
                 convert_split = convert.split("&fb", 1)
-
-                print(convert_split)
 
                 mobile_embed = tb_scanner(convert_split, message.author) #convert_split = convert.split("&fb", 1)
 
